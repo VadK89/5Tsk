@@ -8,7 +8,7 @@ namespace _5Tsk6
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args)        
         {
             //Ввод числа N
             Console.WriteLine("Введите число N для задания размера массива");
@@ -24,67 +24,49 @@ namespace _5Tsk6
                 }
                 Console.WriteLine();  
             }
-            // Вывод массива 
-            for (int i=0; i < n; i++)
-            {
-                for (int j=0; j < n; j++)
-                {
-                    Console.Write("{0,4}", mas[i, j]);
-
-                }
-                Console.WriteLine();
-            }
-            //For magic square         
+            //переменные и массив для подсчета сумм
             int[] sum = new int[n];//массив для вычисления сумм
+            int[] summ = new int[n];//массив для вычисления сумм
             int d1 = 0;
             int d2 = 0;
             int l = 0;
             int k = 0;
-            //подсчет сумм
+            // Вывод массива 
             for (int i = 0; i < n; i++)
-            {              
+            {
                 for (int j = 0; j < n; j++)
                 {
-                    sum[i] = 0;
-                    sum[j] = 0;
-                    sum[i] += mas[i, j];// сумма элементов строки
-                    sum[j] += mas[i, j];//сумма элементов столбца
-                    l = sum[i]; 
-                    k = sum[j];
-                    if (i==j)
+                    Console.Write("{0,4}", mas[i, j]);
+                    /*/sum[i] = 0;            
+                    sum[j] = 0;*/
+                    sum[i] += mas[i, j];//сумма элементов строки
+                    summ[j] += mas[j, i];//сумма элементов столбца
+                    l = sum[i];
+                    k = summ[j];
+                    if (i == j)
                     {
                         d1 += mas[i, j];//сумма элементов главной диагонали
                     }
-                    if (i+j==n-1)
+                    if (i + j == n - 1)
                     {
                         d2 += mas[i, j]; // сумма элементов побочной диагонали
                     }
+                }
+                Console.WriteLine();
 
-                }               
             }
             //проверка на магичность
-            for (int i = 0; i < n; i++)
+               
+            if (l ==k && k == d1 && d1 == d2 && d2 != 0)
             {
-                Console.WriteLine("Суммма элементов {0} строки составляет {1}", i + 1, l);
-                for (int j = 0; j < n; j++)
-                {
-                                        
-                    Console.WriteLine("Суммма элементов {0} столбца составляет {1}", j+1, k);
-
-                    if (sum[i] == sum[j] && sum[j] == d1 && d1 == d2 && d2 != 0)
-                    {
-                        Console.WriteLine("Магический квадрат");
-                    }
-                    else
-                    {
-                        Console.WriteLine("квадрат не магический");
-                    }
-                }
-                
+                Console.WriteLine("Магический квадрат");
             }
-            Console.WriteLine("Суммма элементов диагонали составляет {0}", d1);
-            Console.WriteLine("Суммма элементов диагонали составляет {0}", d2);
+            else
+            {
+                Console.WriteLine("квадрат не магический");
+            }
             Console.ReadKey();
+            
         }
             
 
